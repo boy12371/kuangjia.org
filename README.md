@@ -5,9 +5,9 @@
 
 [![Build Status](https://travis-ci.org/boy12371/kuangjia.org.svg?branch=master)](https://travis-ci.org/boy12371/kuangjia.org)
 
-[![Coverage Status](https://coveralls.io/repos/hexojs/hexo/badge.svg?branch=master)](https://coveralls.io/r/hexojs/hexo?branch=master)
+[![Coverage Status](https://coveralls.io/repos/boy12371/kuangjia.org/badge.svg?branch=master)](https://coveralls.io/r/boy12371/kuangjia.org?branch=master)
 
-[![Build status](https://ci.appveyor.com/api/projects/status/hpx3lduqjj2t6uqq/branch/master?svg=true)](https://ci.appveyor.com/project/tommy351/hexo/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/hpx3lduqjj2t6uqq/branch/master?svg=true)](https://ci.appveyor.com/project/boy12371/kuangjia.org/branch/master)
 
 匡架网络的网站。你可以在[boy12371/boy12371.github.io](https://github.com/boy12371/boy12371.github.io)查看生成的代码.
 
