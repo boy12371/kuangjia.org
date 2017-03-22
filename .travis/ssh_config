@@ -1,0 +1,5 @@
+Host github.com
+	User git
+	StrictHostKeyChecking no
+	IdentityFile ~/.ssh/ssh_key
+	IdentitiesOnly yes
