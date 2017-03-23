@@ -1,12 +1,13 @@
-title: Commands
+title: 指令
 ---
+
 ## init
 
 ``` bash
 $ hexo init [folder]
 ```
 
-Initializes a website. If no `folder` is provided, Hexo will set up the website in the current directory.
+新建一个网站。如果没有设置 `folder` ，Hexo 默认在目前的文件夹建立网站。
 
 ## new
 
@@ -14,7 +15,7 @@ Initializes a website. If no `folder` is provided, Hexo will set up the website 
 $ hexo new [layout] <title>
 ```
 
-Creates a new article. If no `layout` is provided, Hexo will use the `default_layout` from [_config.yml](configuration.html). If the `title` contains spaces, surround it with quotation marks.
+新建一篇文章。如果没有设置 `layout` 的话，默认使用 [_config.yml](configuration.html) 中的 `default_layout` 参数代替。如果标题包含空格的话，请使用引号括起来。
 
 ## generate
 
@@ -22,12 +23,17 @@ Creates a new article. If no `layout` is provided, Hexo will use the `default_la
 $ hexo generate
 ```
 
-Generates static files.
+生成静态文件。
 
-Option | Description
+选项 | 描述
 --- | ---
-`-d`, `--deploy` | Deploy after generation finishes
-`-w`, `--watch` | Watch file changes
+`-d`, `--deploy` | 文件生成后立即部署网站
+`-w`, `--watch` | 监视文件变动
+
+该命令可以简写为
+```bash
+$ hexo g
+```
 
 ## publish
 
@@ -35,7 +41,7 @@ Option | Description
 $ hexo publish [layout] <filename>
 ```
 
-Publishes a draft.
+发表草稿。
 
 ## server
 
@@ -43,13 +49,13 @@ Publishes a draft.
 $ hexo server
 ```
 
-Starts a local server. By default, this is at `http://localhost:4000/`.
+启动服务器。默认情况下，访问网址为： `http://localhost:4000/`。
 
-Option | Description
+选项 | 描述
 --- | ---
-`-p`, `--port` | Override default port
-`-s`, `--static` | Only serve static files
-`-l`, `--log` | Enable logger. Override logger format.
+`-p`, `--port` | 重设端口
+`-s`, `--static` | 只使用静态文件
+`-l`, `--log` | 启动日记记录，使用覆盖记录格式
 
 ## deploy
 
@@ -57,11 +63,16 @@ Option | Description
 $ hexo deploy
 ```
 
-Deploys your website.
+部署网站。
 
-Option | Description
+参数 | 描述
 --- | ---
-`-g`, `--generate` | Generate before deployment
+`-g`, `--generate` | 部署之前预先生成静态文件
+
+该命令可以简写为：
+```bash
+$ hexo d
+```
 
 ## render
 
@@ -69,11 +80,11 @@ Option | Description
 $ hexo render <file1> [file2] ...
 ```
 
-Renders files.
+渲染文件。
 
-Option | Description
+参数 | 描述
 --- | ---
-`-o`, `--output` | Output destination
+`-o`, `--output` | 设置输出路径
 
 ## migrate
 
@@ -81,7 +92,7 @@ Option | Description
 $ hexo migrate <type>
 ```
 
-[Migrates](migration.html) content from other blog systems.
+从其他博客系统 [迁移内容](migration.html)。
 
 ## clean
 
@@ -89,7 +100,9 @@ $ hexo migrate <type>
 $ hexo clean
 ```
 
-Cleans the cache file (`db.json`) and generated files (`public`).
+清除缓存文件 (`db.json`) 和已生成的静态文件 (`public`)。
+
+在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令。
 
 ## list
 
@@ -97,7 +110,7 @@ Cleans the cache file (`db.json`) and generated files (`public`).
 $ hexo list <type>
 ```
 
-Lists all routes.
+列出网站资料。
 
 ## version
 
@@ -105,58 +118,55 @@ Lists all routes.
 $ hexo version
 ```
 
-Displays version information.
+显示 Hexo 版本。
 
-## Options
+## 选项
 
-### Safe mode
+### 安全模式
 
 ``` bash
 $ hexo --safe
 ```
 
-Disables loading plugins and scripts. Try this if you encounter problems after installing a new plugin.
+在安全模式下，不会载入插件和脚本。当您在安装新插件遭遇问题时，可以尝试以安全模式重新执行。
 
-### Debug mode
+### 调试模式
 
 ``` bash
 $ hexo --debug
 ```
 
-Logs verbose messages to the terminal and to `debug.log`. Try this if you encounter any problems with Hexo. If you see errors, please [raise a GitHub issue](https://github.com/hexojs/hexo/issues/new).
+在终端中显示调试信息并记录到 `debug.log`。当您碰到问题时，可以尝试用调试模式重新执行一次，并 [提交调试信息到 GitHub](https://github.com/hexojs/hexo/issues/new)。
 
-### Silent mode
+### 简洁模式
 
 ``` bash
 $ hexo --silent
 ```
 
-Silences output to the terminal.
+隐藏终端信息。
 
-### Customize config file path
+### 自定义配置文件的路径
 
 ``` bash
 $ hexo --config custom.yml
 ```
 
-Uses a custom config file (instead of `_config.yml`). Also accepts a comma-separated list (no spaces) of JSON or YAML config files that will combine the files into a single `_multiconfig.yml`.
+自定义配置文件的路径，执行后将不再使用 `_config.yml`。
 
-``` bash
-$ hexo --config custom.yml,custom2.json
-```
-
-### Display drafts
+### 显示草稿
 
 ``` bash
 $ hexo --draft
 ```
 
-Displays draft posts (stored in the `source/_drafts` folder).
+显示 `source/_drafts` 文件夹中的草稿文章。
 
-### Customize CWD
+### 自定义 CWD
 
 ``` bash
 $ hexo --cwd /path/to/cwd
 ```
 
-Customizes the path of current working directory.
+自定义当前工作目录（Current working directory）的路径。
+

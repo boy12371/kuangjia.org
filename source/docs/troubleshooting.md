@@ -1,82 +1,67 @@
-title: Troubleshooting
+title: 问题解答
 ---
-In case you're experiencing problems with using Hexo, here is a list of solutions to some frequently encountered issues. If this page doesn't help you solve your problem, try doing a search on [GitHub](https://github.com/hexojs/hexo/issues) or our [Google Group](https://groups.google.com/group/hexo).
+在使用 Hexo 时，您可能会遇到一些问题，下列的常见问题解答可能会对您有所帮助。如果您在这里找不道解答，可以在 [GitHub](https://github.com/hexojs/hexo/issues) 或 [Google Group](https://groups.google.com/group/hexo) 上提问。
 
-## YAML Parsing Error
+## YAML 解析错误
 
 ``` plain
 JS-YAML: incomplete explicit mapping pair; a key node is missed at line 18, column 29:
       last_updated: Last updated: %s
 ```
 
-Wrap the string with quotations if it contains colons.
+如果 YAML 字符串中包含冒号（`:`）的话，请加上引号。
 
 ``` plain
 JS-YAML: bad indentation of a mapping entry at line 18, column 31:
       last_updated:"Last updated: %s"
 ```
 
-Make sure you are using soft tabs and add a space after colons.
+请确认您使用空格进行缩进（Soft tab），并确认冒号后有加上一个空格。
 
-You can see [YAML Spec](http://www.yaml.org/spec/1.2/spec.html) for more info.
+您可参阅 [YAML 规范](http://www.yaml.org/spec/1.2/spec.html) 以取得更多信息。
 
-## EMFILE Error
+## EMFILE 错误
 
 ``` plain
 Error: EMFILE, too many open files
 ```
 
-Though Node.js has non-blocking I/O, the maximum number of synchronous I/O is still limited by the system. You may come across an EMFILE error when trying to generate a large number of files. You can try to run the following command to increase the number of allowed synchronous I/O operations.
+虽然 Node.js 有非阻塞 I/O，同步 I/O 的数量仍被系统所限制，在生成大量静态文件的时候，您可能会碰到 EMFILE 错误，您可以尝试提高同步 I/O 的限制数量来解决此问题。
 
 ``` bash
 $ ulimit -n 10000
 ```
+（这一命令只对Linux系统有效）
 
-## Process Out of Memory
-
-When you encounter this error during generation:
-```
-FATAL ERROR: CALL_AND_RETRY_LAST Allocation failed - process out of memory
-```
-
-Increase Node.js heap memory size by changing the first line of `hexo-cli` (`which hexo` to look for the file).
-```
-#!/usr/bin/env node --max_old_space_size=8192
-```
-
-[Out of memory while generating a huge blog · Issue #1735 · hexojs/hexo](https://github.com/hexojs/hexo/issues/1735)
-
-## Git Deployment Problems
+## Git 部署问题
 
 ``` plain
-error: RPC failed; result=22, HTTP code = 403
-
 fatal: 'username.github.io' does not appear to be a git repository
 ```
 
-Make sure you have [set up git](https://help.github.com/articles/set-up-git) on your computer properly or try to use HTTPS repository URL instead.
+请确认您已经在电脑上 [配置 git](https://help.github.com/articles/set-up-git)，或改用 HTTPS 库（repository）地址。
 
-## Server Problems
+## 服务器问题
 
 ``` plain
 Error: listen EADDRINUSE
 ```
 
-You may have started two Hexo servers at the same time or there might be another application using the same port. Try to modify the `port` setting or start the Hexo server with the `-p` flag.
+您可能同时开启两个 Hexo 服务器，或者有其他应用程序正在占用相同的端口，请尝试修改 `port` 参数，或是在启动 Hexo 服务器时加上 `-p` 选项。
 
 ``` bash
 $ hexo server -p 5000
 ```
 
-## Plugin Installation Problems
+## 插件安装问题
 
 ``` plain
 npm ERR! node-waf configure build
 ```
 
-This error may occur when trying to install a plugin written in C, C++ or another non-JavaScript language. Make sure you have installed the right compiler on your computer.
+当您尝试安装以 C/C++ 或其他非 JavaScript 语言所编写的插件时，可能会遇到此类问题，请确认您已经在电脑上安装相对应的编译器。
 
-## Error with DTrace (Mac OS X)
+## DTrace 错误 （Mac OS X）
 
 ```plain
 { [Error: Cannot find module './build/Release/DTraceProviderBindings'] code: 'MODULE_NOT_FOUND' }
@@ -84,44 +69,33 @@ This error may occur when trying to install a plugin written in C, C++ or anothe
 { [Error: Cannot find module './build/Debug/DTraceProviderBindings'] code: 'MODULE_NOT_FOUND' }
 ```
 
-DTrace install may have issue, use this:
+DTrace 安装可能有错误 , 使用下列命令:
 ```sh
 $ npm install hexo --no-optional
 ```
-See [#1326](https://github.com/hexojs/hexo/issues/1326#issuecomment-113871796)
+参考 [#1326](https://github.com/hexojs/hexo/issues/1326#issuecomment-113871796)
 
-## Iterate Data Model on Jade or Swig
 
-Hexo uses [Warehouse] for its data model. It's not an array so you may have to transform objects into iterables.
+## 在 Jade 或 Swig 遍历资料
+
+Hexo 使用 [Warehouse] 存储资料，它不是一般数组所以必须先进行类型转型才能遍历。
 
 ```
 {% for post in site.posts.toArray() %}
 {% endfor %}
 ```
 
-## Data Not Updated
+## 资料没有更新
 
-Some data cannot be updated, or the newly generated files are identical to those of the last version. Clean the cache and try again.
+有时资料可能没有被更新，或是生成的文件与修改前的相同，您可以尝试清除缓存并再执行一次。
 
 ``` bash
 $ hexo clean
 ```
 
-## No command is executed
+## 泄露（Escape）内容
 
-When you can't get any command except `help`, `init` and `version` to work and you keep getting content of `hexo help`, it could be caused by a missing `hexo` in `package.json`:
-
-```json
-{
-  "hexo": {
-    "version": "3.2.2"
-  }
-}
-```
-
-## Escape Contents
-
-Hexo uses [Nunjucks] to render posts ([Swig] was used in older version, which share a similar syntax). Content wrapped with `{% raw %}{{ }}{% endraw %}` or `{% raw %}{% %}{% endraw %}` will get parsed and may cause problems. You can wrap sensitive content with the `raw` tag plugin.
+Hexo 使用 [Nunjucks] 来解析文章（旧版本使用 [Swig]，两者语法类似），内容若包含 `{% raw %}{{ }}{% endraw %}` 或 `{% raw %}{% %}{% endraw %}` 可能导致解析错误，您可以用 `raw` 标签包裹来避免潜在问题发生。
 
 ```
 {% raw %}
@@ -129,31 +103,19 @@ Hello {{ sensitive }}
 {% endraw %}
 ```
 
-## ENOSPC Error (Linux)
+## ENOSPC 错误 （Linux）
 
-Sometimes when running the command `$ hexo server` it returns an error:
+运行 `$ hexo server` 命令有时会返回这样的错误：
 ```
 Error: watch ENOSPC ...
 ```
-It can be fixed by running `$ npm dedupe` or, if that doesn't help, try the following in the Linux console:
+它可以用过运行 `$ npm dedupe` 来解决，如果不起作用的话，可以尝试在 Linux 终端中运行下列命令：
 ```
 $ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 ```
-This will increase the limit for the number of files you can watch.
-
-## EMPERM Error (Windows Subsystem for Linux)
-
-When running `$ hexo server` in a BashOnWindows environment, it returns the following error:
-```
-Error: watch /path/to/hexo/theme/ EMPERM
-```
-Unfortunately, WSL does not currently support filesystem watchers. Therefore, the live updating feature of hexo's server is currently unavailable. You can still run the server from a WSL environment by first generating the files and then running it as a static server:
-``` sh
-$ hexo generate
-$ hexo server -s
-```
-This is [a known BashOnWindows issue](https://github.com/Microsoft/BashOnWindows/issues/216), and on 15 Aug 2016, the Windows team said they would work on it. You can get progress updates and encourage them to prioritize it on [the issue's UserVoice suggestion page](https://wpdev.uservoice.com/forums/266908-command-prompt-console-bash-on-ubuntu-on-windo/suggestions/13469097-support-for-filesystem-watchers-like-inotify).
+这将会提高你能监视的文件数量。
 
 [Warehouse]: https://github.com/tommy351/warehouse
 [Swig]: http://paularmstrong.github.io/swig/
 [Nunjucks]: http://mozilla.github.io/nunjucks/
+

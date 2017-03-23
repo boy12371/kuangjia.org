@@ -1,12 +1,12 @@
 title: API
 ---
-This documentation provides more detailed information about the API and will be particularly helpful for people who want to modify the Hexo source code or write new plugins. If you are interested in more basic usage of Hexo, please refer to the [docs](../docs) instead.
+本文件提供您更丰富的 API 信息，使您更容易修改 Hexo 源代码或编写插件。如果您只是想查询 Hexo 的基本使用方法，请参阅 [文档](../docs/)。
 
-Please note that this documentation is only valid for Hexo 3 and above.
+在开始之前，请注意本文件仅适用于 Hexo 3 及以上版本。
 
-## Initialize
+## 初始化
 
-First, we have to create a Hexo instance. A new instance takes two arguments: the root directory of the website, `base_dir`, and an object containing the initialization options. Next, we initialize this instance by calling the `init` method on it, which will then cause Hexo to load its configuration and plugins.
+首先，我们必须建立一个 Hexo 实例（instance），第一个参数是网站的根目录，也就是 `base_dir`，而第二个参数则是初始化的选项。接著执行 `init` 方法后，Hexo 会加载插件及配置文件。
 
 ``` js
 var Hexo = require('hexo');
@@ -17,18 +17,18 @@ hexo.init().then(function(){
 });
 ```
 
-Option | Description | Default
+参数 | 描述 | 默认值
 --- | --- | ---
-`debug` | Enable debug mode. Display debug messages in the terminal and save `debug.log` in the root directory. | `false`
-`safe` | Enable safe mode. Don't load any plugins. | `false`
-`silent` | Enable silent mode. Don't display any messages in the terminal. | `false`
-`config` | Specify the path of the configuration file. | `_config.yml`
+`debug` | 开启调试模式。在终端中显示调试信息，并在根目录中存储 `debug.log` 日志文件。| `false`
+`safe` | 开启安全模式。不加载任何插件。| `false`
+`silent` | 开启安静模式。不在终端中显示任何信息。| `false`
+`config` | 指定配置文件的路径。| `_config.yml`
 
-## Load Files
+## 载入文件
 
-Hexo provides two methods for loading files: `load` and `watch`. `load` is used for loading all files in the `source` folder as well as the theme data. `watch` does the same things `load` does, but will also start watching for file changes continuously.
+Hexo 提供了两种方法来载入文件：`load`, `watch`，前者用于载入 `source` 文件夹内的所有文件及主题资源；而后者除了执行 `load` 以外，还会继续监视文件变动。
 
-Both methods will load the list of files and pass them to the corresponding processors. After all files have been processed, they will call upon the generators to create the routes.
+这两个方法实际上所做的，就是载入文件列表，并把文件传给相对应的处理器（Processor），当文件全部处理完毕后，就执行生成器（Generator）来建立路由。
 
 ``` js
 hexo.load().then(function(){
@@ -36,13 +36,13 @@ hexo.load().then(function(){
 });
 
 hexo.watch().then(function(){
-  // You can call hexo.unwatch() later to stop watching.
+  // 之后可以调用 hexo.unwatch()，停止监视文件
 });
 ```
 
-## Execute Commands
+## 执行指令
 
-Any console command can be called explicitly using the `call` method on the Hexo instance. Such a call takes two arguments: the name of the console command, and an options argument. Different options are available for the different console commands.
+您可以通过 `call` 方法来调用控制台（Console），第一个参数是控制台的名称，而第二个参数是选项——根据不同控制台有所不同。
 
 ``` js
 hexo.call('generate', {}).then(function(){
@@ -50,9 +50,9 @@ hexo.call('generate', {}).then(function(){
 });
 ```
 
-## Exit
+## 结束
 
-You should call the `exit` method upon successful or unsuccessful completion of a console command. This allows Hexo to exit gracefully and finish up important things such as saving the database.
+当指令完毕后，请执行 `exit` 方法让 Hexo 退出结束前的准备工作（如存储资料库）。
 
 ``` js
 hexo.call('generate').then(function(){

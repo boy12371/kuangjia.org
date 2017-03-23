@@ -1,37 +1,36 @@
-title: Filter
+title: 过滤器（Filter）
 ---
-A filter is used to modify some specified data. Hexo passes data to filters in sequence and the filters then modify the data one after the other. This concept was borrowed from [WordPress](http://codex.wordpress.org/Plugin_API#Filters).
+过滤器用于修改特定文件，Hexo 将这些文件依序传给过滤器，而过滤器可以针对文件进行修改，这个概念借鉴自 [WordPress](http://codex.wordpress.org/Plugin_API#Filters)。
 
-## Synopsis
+## 概要
 
 ``` js
 hexo.extend.filter.register(type, function(){
-  // ...
 }, priority);
 ```
 
-You can define the `priority`. Lower `priority` means that it will be executed first. The default `priority` is 10.
+您可以指定过滤器的优先级 `priority`，`priority` 值越低，过滤器会越早执行，默认的 `priority` 是 10。
 
-## Execute Filters
+## 执行过滤器
 
 ``` js
 hexo.extend.filter.exec(type, data, options);
 hexo.extend.filter.execSync(type, data, options);
 ```
 
-Option | Description
+选项 | 描述
 --- | ---
 `context` | Context
-`args` | Arguments. This must be an array.
+`args` | 参数。必须为数组。
 
-The first argument passed into each filter is `data`. The `data` passed into the next filter can be modified by returning a new value. If nothing is returned, the data remains unmodified. You can even use `args` to specify other arguments in filters. For example:
+`data` 会作为第一个参数传入每个过滤器，而您可以在过滤器中通过返回值改变下一个过滤器中的 `data`，如果什么都没有返回的话则会保持原本的 `data`。您还可以使用 `args` 指定过滤器的其他参数。举例来说：
 
 ``` js
 hexo.extend.filter.register('test', function(data, arg1, arg2){
   // data === 'some data'
   // arg1 === 'foo'
   // arg2 === 'bar'
-
+  
   return 'something';
 });
 
@@ -44,28 +43,28 @@ hexo.extend.filter.exec('test', 'some data', {
 });
 ```
 
-You can also use the following methods to execute filters:
+您也可以使用以下方法来执行过滤器：
 
 ``` js
 hexo.execFilter(type, data, options);
 hexo.execFilterSync(type, data, options);
 ```
 
-## Unregister Filters
+## 移除过滤器
 
 ``` js
 hexo.extend.filter.unregister(type, filter);
 ```
 
-## Filter List
+## 过滤器列表
 
-Here is a list of filters used by Hexo.
+以下是 Hexo 所使用的过滤器。
 
 ### before_post_render
 
-Executed before a post is rendered. Refer to [post rendering](posts.html#Render) to learn the execution steps.
+在文章开始渲染前执行。您可以参考 [文章渲染](posts.html#渲染) 以了解执行顺序。
 
-For example, to transform the title to lower case:
+举例来说，把标题转为小写：
 
 ``` js
 hexo.extend.filter.register('before_post_render', function(data){
@@ -76,9 +75,9 @@ hexo.extend.filter.register('before_post_render', function(data){
 
 ### after_post_render
 
-Executed after a post is rendered. Refer to [post rendering](posts.html#Render) to learn the execution steps.
+在文章渲染完成后执行。您可以参考 [文章渲染](posts.html#渲染) 以了解执行顺序。
 
-For example, to replace `@username` with a link to a Twitter profile:
+举例来说，把 `@username` 取代为 Twitter 的开发者链接。
 
 ``` js
 hexo.extend.filter.register('after_post_render', function(data){
@@ -89,7 +88,7 @@ hexo.extend.filter.register('after_post_render', function(data){
 
 ### before_exit
 
-Executed before Hexo is about to exit -- this will run right after `hexo.exit` is called.
+在 Hexo 即将结束时执行，也就是在 `hexo.exit` 被调用后执行。
 
 ``` js
 hexo.extend.filter.register('before_exit', function(){
@@ -99,7 +98,7 @@ hexo.extend.filter.register('before_exit', function(){
 
 ### before_generate
 
-Executed before generation begins.
+在生成器解析前执行。
 
 ``` js
 hexo.extend.filter.register('before_generate', function(){
@@ -109,7 +108,7 @@ hexo.extend.filter.register('before_generate', function(){
 
 ### after_generate
 
-Executed after generation finishes.
+在生成器解析后执行。
 
 ``` js
 hexo.extend.filter.register('after_generate', function(){
@@ -119,9 +118,9 @@ hexo.extend.filter.register('after_generate', function(){
 
 ### template_locals
 
-Modify [local variables](../docs/variables.html) in templates.
+修改模板的 [局部变量](../docs/variables.html)。
 
-For example, to add the current time to the local variables of templates:
+举例来说，在模板的局部变量中新增当前时间：
 
 ``` js
 hexo.extend.filter.register('template_locals', function(locals){
@@ -132,7 +131,7 @@ hexo.extend.filter.register('template_locals', function(locals){
 
 ### after_init
 
-Executed after Hexo is initialized -- this will run right after `hexo.init` completes.
+在 Hexo 初始化完成后执行，也就是在 `hexo.init` 执行完成后执行。
 
 ``` js
 hexo.extend.filter.register('after_init', function(){
@@ -142,7 +141,7 @@ hexo.extend.filter.register('after_init', function(){
 
 ### new_post_path
 
-Executed when creating a post to determine the path of new posts.
+用来决定新建文章的路径，在建立文章时执行。
 
 ``` js
 hexo.extend.filter.register('new_post_path', function(data, replace){
@@ -152,7 +151,7 @@ hexo.extend.filter.register('new_post_path', function(data, replace){
 
 ### post_permalink
 
-Used to determine the permalink of posts.
+用来决定文章的永久链接。
 
 ``` js
 hexo.extend.filter.register('post_permalink', function(data){
@@ -162,13 +161,13 @@ hexo.extend.filter.register('post_permalink', function(data){
 
 ### after_render
 
-Executed after rendering finishes. You can see [rendering](rendering.html#after_render_Filters) for more info.
+在渲染后执行，您可以参考 [渲染](rendering.html#after_render_过滤器) 以了解更多信息。
 
 ### server_middleware
 
-Add middleware to the server. `app` is a [Connect] instance.
+新增服务器的 Middleware。`app` 是一个 [Connect] 实例。
 
-For example, to add `X-Powered-By: Hexo` to the response header:
+举例来说，在响应头中新增 `X-Powered-By: Hexo`。
 
 ``` js
 hexo.extend.filter.register('server_middleware', function(app){

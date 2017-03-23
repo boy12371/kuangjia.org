@@ -1,92 +1,93 @@
-title: Variables
+title: 变量
 ---
-### Global Variables
+### 全局变量
+
+变量 | 描述
+--- | ---
+`site` | [网站变量](#网站变量)
+`page` | 针对该页面的内容以及 front-matter 所设定的变量。
+`config` | 网站配置
+`theme` | 主题配置。继承自网站配置。
+`_` (单下划线) | [Lodash] 函数库
+`path` | 当前页面的路径（不含根路径）
+`url` | 当前页面的完整网址
+`env` | 环境变量
+
+### 网站变量
+
+变量 | 描述
+--- | ---
+`site.posts` | 所有文章
+`site.pages` | 所有分页
+`site.categories` | 所有分类
+`site.tags` | 所有标签
+
+### 页面变量
+
+**页面（page）**
+
+变量 | 描述
+--- | ---
+`page.title` | 页面标题
+`page.date` | 页面建立日期（[Moment.js] 对象）
+`page.updated` | 页面更新日期（[Moment.js] 对象）
+`page.comments` | 留言是否开启
+`page.layout` | 布局名称
+`page.content` | 页面的完整内容
+`page.excerpt` | 页面摘要
+`page.more` | 除了页面摘要的其余内容
+`page.source` | 页面原始路径
+`page.full_source` | 页面的完整原始路径
+`page.path` | 页面网址（不含根路径）。我们通常在主题中使用 `url_for(page.path)`。
+`page.permalink` | 页面的完整网址
+`page.prev` | 上一个页面。如果此为第一个页面则为 `null`。
+`page.next` | 下一个页面。如果此为最后一个页面则为 `null`。
+`page.raw` | 文章的原始内容
+`page.photos` | 文章的照片（用于相簿）
+`page.link` | 文章的外部链接（用于链接文章）
+
+**文章 (post):** 和 `page` 布局类似，但是添加了下列变量。
 
 Variable | Description
 --- | ---
-`site` | Sitewide information.
-`page` | Page specific information and custom variables set in front-matter.
-`config` | Site configuration
-`theme` | Theme configuration. Inherits from site configuration.
-`_` (single underscore) | [Lodash](https://lodash.com/  "Lodash" target="_blank") library
-`path` | Path of current page
-`url` | Full URL of current page
-`env` | Environment variables
+`page.published` | 如果该文章已发布则为True
+`page.categories` | 该文章的所有分类
+`page.tags` | 该文章的所有标签
 
-### Site Variables
+**首页（index）**
 
-Variable | Description
+变量 | 描述
 --- | ---
-`site.posts` | All posts
-`site.pages` | All pages
-`site.categories` | All categories
-`site.tags` | All tags
+`page.per_page` | 每页显示的文章数量
+`page.total` | 总文章数
+`page.current` | 目前页数
+`page.current_url` | 目前分页的网址
+`page.posts` | 本页文章
+`page.prev` | 上一页的页数。如果此页是第一页的话则为 `0`。
+`page.prev_link` | 上一页的网址。如果此页是第一页的话则为 `''`。
+`page.next` | 下一页的页数。如果此页是最后一页的话则为 `0`。
+`page.next_link` | 下一页的网址。如果此页是最后一页的话则为 `''`。
+`page.path` | 当前页面的路径（不含根目录）。我们通常在主题中使用 `url_for(page.path)`。
 
-### Page Variables
+**归档 (archive)**：与 `index` 布局相同，但新增以下变量。
 
-**Article (page)**
-
-Variable | Description
+变量 | 描述
 --- | ---
-`page.title` | Article title
-`page.date` | Article created date ([Moment.js] object)
-`page.updated` | Article last updated date ([Moment.js] object)
-`page.comments` | Comment enabled or not
-`page.layout` | Layout name
-`page.content` | The full processed content of the article
-`page.excerpt` | Article excerpt
-`page.more` | Contents except article excerpt
-`page.source` | The path of the source file
-`page.full_source` | Full path of the source file
-`page.path` | The URL of the article without root URL. We usually use `url_for(page.path)` in theme.
-`page.permalink` | Full URL of the article
-`page.prev` | The previous post, `null` if the post is the first post
-`page.next` | The next post, `null` if the post is the last post
-`page.raw` | The raw data of the article
-`page.photos` | The photos of the article (Used in gallery posts)
-`page.link` | The external link of the article (Used in link posts)
+`page.archive` | 等于 `true`
+`page.year` | 年份归档 (4位)
+`page.month` | 月份归档 (没有前导零的2位数)
 
-**Post (post):** Same as `page` layout but add the following variables.
+**分类 (category)**：与 `index` 布局相同，但新增以下变量。
 
-Variable | Description
+变量 | 描述
 --- | ---
-`page.published` | True if the post is not a draft
-`page.categories` | All categories of the post
-`page.tags` | All tags of the post
+`page.category` | 分类名称
 
-**Home (index)**
+**标签 (tag)**：与 `index` 布局相同，但新增以下变量。
 
-Variable | Description
+变量 | 描述
 --- | ---
-`page.per_page` | Posts displayed per page
-`page.total` | Total number of pages
-`page.current` | Current page number
-`page.current_url` | The URL of current page
-`page.posts` | Posts in this page ([Data Model])
-`page.prev` | Previous page number. `0` if the current page is the first.
-`page.prev_link` | The URL of previous page. `''` if the current page is the first.
-`page.next` | Next page number. `0` if the current page is the last.
-`page.next_link` | The URL of next page. `''` if the current page is the last.
-`page.path` | The URL of current page without root URL. We usually use `url_for(page.path)` in theme.
+`page.tag` | 标签名称
 
-**Archive (archive):** Same as `index` layout but add the following variables.
-
-Variable | Description
---- | ---
-`page.archive` | Equals `true`
-`page.year` | Archive year (4-digit)
-`page.month` | Archive month (2-digit without leading zeros)
-
-**Category (category):** Same as `index` layout but add the following variables.
-
-Variable | Description
---- | ---
-`page.category` | Category name
-
-**Tag (tag):** Same as `index` layout but add the following variables.
-
-Variable | Description
---- | ---
-`page.tag` | Tag name
-
+[Lodash]: http://lodash.com/
 [Moment.js]: http://momentjs.com/

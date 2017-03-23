@@ -1,10 +1,10 @@
-title: Box
+title:  Box
 ---
-Box is a container used for processing files in a specified folder. Hexo uses two different boxes: `hexo.source` and `hexo.theme`. The former is used to process the `source` folder and the latter to process the `theme` folder.
+「Box」是 Hexo 用来处理特定文件夹中的文件的容器，在 Hexo 中有两个 Box，分别是 `hexo.source` 和 `hexo.theme`，前者用于处理 `source` 文件夹，而后者用于处理主题文件夹。
 
-## Load Files
+## 载入文件
 
-Box provides two methods for loading files: `process` and `watch`. `process` loads all files in the folder. `watch` does the same, but also starts watching for file changes.
+Box 提供了两种方法来载入文件：`process`, `watch`，前者用于载入文件夹内的所有文件；而后者除了执行 `process` 以外，还会继续监视文件变动。
 
 ``` js
 box.process().then(function(){
@@ -12,24 +12,24 @@ box.process().then(function(){
 });
 
 box.watch().then(function(){
-  // You can call box.unwatch() later to stop watching.
+  // 之后可调用 box.unwatch()，停止监视文件
 });
 ```
 
-## Path Matching
+## 比对路径
 
-Box provides many ways for path matching. You can use a regular expression, a function or an Express-style pattern string. For example:
+Box 提供了多种比对路径的模式，您可以以使用正则表达式（regular expression）、函数、或是一种类似于 Express 的路径字符串，例如：
 
 ``` plain
 posts/:id => posts/89
 posts/*path => posts/2015/title
 ```
 
-See [util.Pattern] for more info.
+您可以以参考 [util.Pattern] 以获得更多信息。
 
-## Processors
+## 处理器（Processor）
 
-A processor is an essential element of Box and is used to process files. You can use path matching as described above to restrict what exactly the processor should process. Register a new processor with the `addProcessor` method.
+处理器（Processor）是 Box 中非常重要的元素，它用于处理文件，您可以使用上述的路径对比来限制该处理器所要处理的文件类型。使用 `addProcessor` 来添加处理器。
 
 ``` js
 box.addProcessor('posts/:id', function(file){
@@ -37,24 +37,24 @@ box.addProcessor('posts/:id', function(file){
 });
 ```
 
-Box passes the content of matched files to processors. This information can then be read straight from the `file` argument in the callback:
+Box 在处理时会把目前处理的文件内容（`file`）传给处理器，您可以通过此参数获得该文件的数据。
 
-Attribute | Description
+属性 | 描述
 --- | ---
-`source` | Full path of the file
-`path` | Relative path to the box of the file
-`type` | File type. The value can be `create`, `update`, `skip`, `delete`.
-`params` | The information from path matching.
+`source` | 文件完整路径
+`path` | 文件相对于 Box 的路径
+`type` | 文件类型。有 `create`, `update`, `skip`, `delete`。
+`params` | 从路径对比中取得的信息
 
-Box also provides some methods so you don't have to do file IO by yourself.
+Box 还提供了一些方法，让您无须手动处理文件 I/O。
 
-Method | Description
+方法 | 描述
 --- | ---
-`read` | Read a file
-`readSync` | Read a file synchronously
-`stat` | Read the status of a file
-`statSync` | Read the status of a file synchronously
-`render` | Render a file
-`renderSync` | Render a file synchronously
+`read` | 读取文件
+`readSync` | 同步读取文件
+`stat` | 读取文件状态
+`statSync` | 同步读取文件状态
+`render` | 渲染文件
+`renderSync` | 同步渲染文件
 
 [util.Pattern]: https://github.com/hexojs/hexo-util#patternrule

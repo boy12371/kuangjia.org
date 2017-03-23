@@ -1,31 +1,30 @@
-title: Renderer
+title: 渲染引擎（Renderer）
 ---
-A renderer is used to render content.
+渲染引擎用于渲染内容。
 
-## Synopsis
+## 概要
 
 ``` js
 hexo.extend.renderer.register(name, output, function(data, options){
-  // ...
 }, sync);
 ```
 
-Argument | Description
+参数 | 描述
 --- | ---
-`name` | Input filename extension (lower case, without leading `.`)
-`output` | Output filename extension (lower case, without leading `.`)
-`sync` | Sync mode
+`name` | 输入的扩展名（小写，不含开头的 `.`）
+`output` | 输出的扩展名（小写，不含开头的 `.`）
+`sync` | 同步模式
 
-Two arguments will be passed into the render function:
+渲染函数中会传入两个参数：
 
-Argument | Description
+参数 | 描述
 --- | ---
-`data` | Include two attributes: file path `path` and file content `text`. `path` won't necessarily exist.
-`option` | Options
+`data` | 包含两个属性：文件路径 `path` 和文件内容 `text`。`path` 不一定存在。
+`option` | 选项
 
-## Example
+## 范例
 
-### Async Mode
+### 非同步模式
 
 ``` js
 var stylus = require('stylus');
@@ -43,7 +42,7 @@ hexo.extend.renderer.register('styl', 'css', function(data, options){
 });
 ```
 
-### Sync Mode
+### 同步模式
 
 ``` js
 var ejs = require('ejs');

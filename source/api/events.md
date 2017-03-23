@@ -1,52 +1,52 @@
-title: Events
+title: 事件
 ---
-Hexo inherits from [EventEmitter]. Use the `on` method to listen for events emitted by Hexo, and use the `emit` method to emit events. For more information, refer to the Node.js API documentation.
+Hexo 继承了 [EventEmitter]，您可以用 `on` 方法监听 Hexo 所发布的事件，也可以使用 `emit` 方法对 Hexo 发布事件，更详细的说明请参阅 Node.js 的 API。
 
 ### deployBefore
 
-Emitted before deployment begins.
+在部署完成前发布。
 
 ### deployAfter
 
-Emitted after deployment finishes.
+在部署成功后发布。
 
 ### exit
 
-Emitted before Hexo exits.
+在 Hexo 结束前发布。
 
 ### generateBefore
 
-Emitted before generation begins.
+在静态文件生成前发布。
 
 ### generateAfter
 
-Emitted after generation finishes.
+在静态文件生成后发布。
 
 ### new
 
-Emitted after a new post has been created. This event returns the post data:
+在文章文件建立后发布。该事件返回文章参数。
 
 ``` js
 hexo.on('new', function(post){
-  //
+  // 
 });
 ```
 
-Data | Description
+资料 | 描述
 --- | ---
-`post.path` | Full path of the post file
-`post.content` | Content of the post file
+`post.path` | 文章文件的完整路径
+`post.content` | 文章文件的内容
 
 ### processBefore
 
-Emitted before processing begins. This event returns a path representing the root directory of the box.
+在处理原始文件前发布。此事件会返回一个地址，代表 Box（Box）的根目录。
 
 ### processAfter
 
-Emitted after processing finishes. This event returns a path representing the root directory of the box.
+在原始文件处理后发布。此事件会返回一个地址，代表 Box（Box）的根目录。
 
 ### ready
 
-Emitted after initialization finishes.
+在初始化完成后发布。
 
 [EventEmitter]: http://nodejs.org/api/events.html

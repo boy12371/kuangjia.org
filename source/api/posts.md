@@ -1,60 +1,60 @@
-title: Posts
+title: 文章
 ---
-## Create a Post
+## 新建文章
 
 ``` js
 hexo.post.create(data, replace);
 ```
 
-Argument | Description
+参数 | 描述
 --- | ---
-`data` | Data
-`replace` | Replace existing files
+`data` | 数据
+`replace` | 替换现有文件
 
-The attributes of a post can be defined in `data`. The table below is not exhaustive. Additional attributes may be appended to the front-matter.
+您可以在资料中指定文章的属性，除了以下属性之外，其他属性也会被加到 front-matter 中。
 
-Data | Description
+属性 | 描述
 --- | ---
-`title` | Title
-`slug` | URL
-`layout` | Layout. Defaults to the `default_layout` setting.
-`path` | Path. Hexo builds the post path based on the `new_post_path` setting by default.
-`date` | Date. Defaults to the current date.
+`title` | 标题
+`slug` | 网址
+`layout` | 布局。默认为 `default_layout` 参数。
+`path` | 路径。默认会根据 `new_post_path` 参数创建文章路径。
+`date` | 日期。默认为当前时间。
 
-## Publish a Draft
+## 发布草稿
 
 ``` js
 hexo.post.publish(data, replace);
 ```
 
-Argument | Description
+参数 | 描述
 --- | ---
-`data` | Data
-`replace` | Replace existing files
+`data` | 资料
+`replace` | 替换现有文件
 
-The attributes of a post can be defined in `data`. The table below is not exhaustive. Additional attributes may be appended to the front-matter.
+您可以在资料中指定文章的属性，除了以下的属性之外，其他属性也会被加到 front-matter 中。
 
-Data | Description
+属性 | 描述
 --- | ---
-`slug` | File name (Required)
-`layout` | Layout. Defaults to the `default_layout` setting.
+`slug` | 文件名称（必须）
+`layout` | 布局。默认为 `default_layout` 参数。
 
-## Render
+## 渲染
 
 ``` js
 hexo.post.render(source, data);
 ```
 
-Argument | Description
+参数 | 描述
 --- | ---
-`source` | Full path of a file (Optional)
-`data` | Data
+`source` | 文件的完整路径（可忽略）
+`data` | 数据
 
-The data must contain the `content` attribute. If not, Hexo will try to read the original file. The execution steps of this function are as follows:
+资料中必须包含 `content` 属性，如果没有的话，会尝试读取原始文件。此函数的执行顺序为：
 
-- Execute `before_post_render` filters
-- Render with Markdown or other renderers (depending on the extension name)
-- Render with [Nunjucks]
-- Execute `after_post_render` filters
+- 执行 `before_post_render` 过滤器
+- 使用 Markdown 或其他渲染器渲染（根据扩展名而定）
+- 使用 [Nunjucks] 渲染
+- 执行 `after_post_render` 过滤器
 
 [Nunjucks]: http://mozilla.github.io/nunjucks/
