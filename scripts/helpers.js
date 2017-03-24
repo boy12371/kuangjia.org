@@ -69,10 +69,10 @@ hexo.extend.helper.register('header_menu', function(className){
   var result = '';
   var self = this;
   var lang = this.page.lang;
-  var isEnglish = lang === 'en';
+  var isChinese = lang === 'zh-cn';
 
   _.each(menu, function(path, title){
-    if (!isEnglish && ~localizedPath.indexOf(title)) path = lang + path;
+    if (!isChinese && ~localizedPath.indexOf(title)) path = lang + path;
 
     result += '<a href="' + self.url_for(path) + '" class="' + className + '-link">' + self.__('menu.' + title) + '</a>';
   });
@@ -82,7 +82,7 @@ hexo.extend.helper.register('header_menu', function(className){
 
 hexo.extend.helper.register('canonical_url', function(lang){
   var path = this.page.canonical_path;
-  if (lang && lang !== 'en') path = lang + '/' + path;
+  if (lang && lang !== 'zh-cn') path = lang + '/' + path;
 
   return this.config.url + '/' + path;
 });
@@ -91,7 +91,7 @@ hexo.extend.helper.register('url_for_lang', function(path){
   var lang = this.page.lang;
   var url = this.url_for(path);
 
-  if (lang !== 'en' && url[0] === '/') url = '/' + lang + url;
+  if (lang !== 'zh-cn' && url[0] === '/') url = '/' + lang + url;
 
   return url;
 });
