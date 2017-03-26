@@ -1,7 +1,7 @@
 title: kuangjia.org
 subtitle: "开发和运维"
-description: "互联网运维和开发的数据服务, 金融, 游戏, 营销和研发产品, 平台数据服务。"
-author: Richard Kuang
+description: "区块链运维和开发的数据服务, 金融, 游戏, 电商, 教育和营销产品的平台数据服务。"
+author: Kuangjia Network
 language: zh-cn
 timezone: Asia/Shanghai
 url: http://boy12371.github.io
@@ -16,14 +16,14 @@ highlight:
   line_number: false
 per_page: 0
 
-theme: navy
+theme: blockchain
 deploy:
   type: git
   repo: git@github.com:boy12371/boy12371.github.io.git
 
-disqus_shortname: kuangjia.com
+disqus_shortname: kuangjia.org
 google_analytics:
-fb_admins: 100000247608790
+fb_admins:
 algolia:
   zh-cn:
     api_key:
