@@ -17,9 +17,14 @@ highlight:
 per_page: 0
 
 theme: blockchain
+
+# Deployment
+## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:boy12371/boy12371.github.io.git
+  repo: https://github.com/boy12371/kuangjia.org.git
+  branch: master
+  message: Site updated {{ now('YYYY-MM-DD HH:mm:ss') }}
 
 disqus_shortname: kuangjia.org
 google_analytics:
