@@ -2,7 +2,7 @@
   <div class="inner">
     <div id="footer-copyright">
       软件企业编号：沪CR-2017-8888 | 高新技术企业编号：GR201388880080<br>
-      增值电信业务经营许可证：沪B2-20100276 | 沪ICP备10032707号<br>
+      增值电信业务经营许可证：沪B2-20100888 | 沪ICP备10088888号<br>
       Copyright &copy; {{ moment(Date.now()).year() }} <a href="{{ config.url }}" target="_blank">{{ __('index.site_name') }}</a>
     </div>
     <div id="footer-contact">
