@@ -7,8 +7,10 @@ menu:
   search: Search
 
 index:
-  title: Kuangjia Network
+  logo_word: Kuangjia
+  site_name: Kuangjia Network
   banner_start: Focus on Mobile & Internet end-to-end solutions
+  search: Search
   get_started: Get started
 
 page:

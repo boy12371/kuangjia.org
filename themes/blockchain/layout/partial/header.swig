@@ -1,7 +1,7 @@
 <header id="header" class="wrapper">
   <div id="header-inner" class="inner">
     <h1 id="logo-wrap">
-      <a href="{{ url_for_lang('') }}" id="logo">Hexo</a>
+      <a href="{{ url_for_lang('') }}" id="logo">{{ __('index.logo_word') }}</a>
     </h1>
     <nav id="main-nav">
       {{ header_menu('main-nav') }}
@@ -10,7 +10,7 @@
         <div id="search-input-icon">
           <i class="fa fa-search"></i>
         </div>
-        <input type="search" id="search-input" placeholder="Search...">
+        <input type="search" id="search-input" placeholder="{{ __('index.search') }}...">
       </div>
     </nav>
     <div id="lang-select-wrap">

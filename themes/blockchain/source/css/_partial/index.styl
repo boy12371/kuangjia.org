@@ -86,11 +86,11 @@
 .intro-feature-desc
   margin: line-height 0
   line-height: line-height
-
-.intro-feature-desc a:link
-.intro-feature-desc a:visited
-  text-decoration: none
-  color: color-default
+  a
+    &:link
+    &:visited
+      text-decoration: none
+      color: color-default
 
 #intro-cmd-wrap
   max-width: 700px
@@ -106,7 +106,7 @@
   line-height: 2
   padding: 0 30px
   &:before
-    content: "$"
+    content: "#"
     color: color-link
     padding-right: 15px
 

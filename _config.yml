@@ -4,7 +4,7 @@ description: "区块链运维和开发的数据服务, 金融, 游戏, 电商, �
 author: Kuangjia Network
 language: zh-cn
 timezone: Asia/Shanghai
-url: http://boy12371.github.io
+url: http://kuangjia.org
 root: /
 permalink: news/:year/:month/:day/:title/
 archive_dir: news

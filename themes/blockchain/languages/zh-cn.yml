@@ -7,8 +7,10 @@ menu:
   search: 搜索
 
 index:
-  title: 匡架网络
+  logo_word: 匡架
+  site_name: 匡架网络
   banner_start: 专注移动互联领域端到端解决方案
+  search: 搜索
   get_started: 开始使用
 
 page:

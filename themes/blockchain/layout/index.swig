@@ -12,11 +12,11 @@
     <div class="inner">
       {{ page.content }}
       <ul id="intro-cmd-wrap">
-        <li class="intro-cmd-item">npm install hexo-cli -g</li>
-        <li class="intro-cmd-item">hexo init blog</li>
-        <li class="intro-cmd-item">cd blog</li>
-        <li class="intro-cmd-item">npm install</li>
-        <li class="intro-cmd-item">hexo server</li>
+        <li class="intro-cmd-item">免费</li>
+        <li class="intro-cmd-item">不用写一行代码</li>
+        <li class="intro-cmd-item">安卓、苹果和微信客户端</li>
+        <li class="intro-cmd-item">不需要数据库</li>
+        <li class="intro-cmd-item">只要有域名和静态web空间</li>
       </ul>
       <div id="intro-get-started-wrap">
         <a href="docs/" id="intro-get-started-link">{{ __('index.get_started') }}</a>
